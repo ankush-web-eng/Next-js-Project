@@ -1,4 +1,4 @@
-"use Client"
+"use client"
 import React from 'react'
 import Link from 'next/link'
 import { Axios } from 'axios'
@@ -12,10 +12,14 @@ export default function LoginPage(){
         username : ""
     })
 
+    const onSignup =  async() =>{
+        
+    }
+
     return (
         <div>
-            <h1>
-                This is a login Page!!
+            <h1 className='flex justify-center items-center h-screen text-5xl'>
+                Login Page!!
             </h1>
         </div>
     )
