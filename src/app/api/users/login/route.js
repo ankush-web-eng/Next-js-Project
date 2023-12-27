@@ -3,9 +3,9 @@ import User from "@/models/userModel";
 import bcryptjs from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import toast from "react-hot-toast";
 
 connect();
+
 
 export async function POST(NextRequest) {
   try {
