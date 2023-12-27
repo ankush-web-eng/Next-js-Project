@@ -42,7 +42,7 @@ export default function SignUpPage(){
                 placeholder='email'
                 onChange={(e)=>setUser({...user, email:e.target.value})}
             />
-            <label className='py-4'>password</label>
+            <label className='py-4'>Password</label>
             <hr/>
             <input
                 id='password'
