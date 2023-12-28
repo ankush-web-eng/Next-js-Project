@@ -1,4 +1,9 @@
-export default function UserProfilePage({params}, any){
+"use client"
+
+export default function UserProfilePage({params}){
+
+        
+
     return (
         <div className="h-screen flex flex-col justify-center ">
             <h1 className="text-6xl flex justify-center">Profile</h1>
