@@ -8,6 +8,6 @@ export default function getDataFromToken (request)  {
 
         return verifiedData.id;
     } catch (error) {
-        throw new error(error.message)
+        throw new Error(error.message)
     }
 }
