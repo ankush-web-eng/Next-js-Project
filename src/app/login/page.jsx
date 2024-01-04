@@ -4,6 +4,7 @@ import Link from 'next/link'
 import  axios  from 'axios'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import Header from '@/components/navbar'
 
 export default function LoginPage(){
     const router  = useRouter()
@@ -40,6 +41,8 @@ export default function LoginPage(){
       }, [user]);
 
     return (
+        <>
+        <Header />
         <div className='h-screen flex-col flex justify-center items-center '>
             <h1 className='text-5xl'>
             {loading?"processing" : "Login"}
@@ -70,5 +73,6 @@ export default function LoginPage(){
              hover:bg-white active:bg-red-500 hover:text-black' >{buttonDisabled?"No Login":"Login"}</button>
             <Link href="/signup" >Visit Signup Page</Link>
         </div>
+        </>
     )
 }
