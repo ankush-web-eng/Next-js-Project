@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import { NextRequest } from "next/server";
 
 export default function getDataFromToken (request)  {
     try {
