@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Header from "@/components/navbar";
+import { ThemeProvider } from "../../contexts/theme";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function SignUpPage() {
   const onSignup = async () => {
     try {
       setLoading(true);
+      setFailed("");
       const response = await axios.post("/api/users/signup", user, {
         headers: {
           "Content-Type": "application/JSON",
@@ -29,7 +31,7 @@ export default function SignUpPage() {
       toast.success("Signup Successful!");
       router.push("/login");
     } catch (error) {
-      setFailed("Invalid Credentials!")
+      setFailed("Invalid Credentials!");
       console.log("Signup Failed!!", error.response.data);
       toast.error("Signup Failed");
     } finally {
@@ -40,8 +42,8 @@ export default function SignUpPage() {
   useEffect(() => {
     if (
       user.username.length > 0 &&
-      user.email.length > 5 &&
-      user.password.length > 7
+      user.email.length > 3 &&
+      user.password.length > 3
     ) {
       setButtonDisabled(false);
     } else {
@@ -49,10 +51,25 @@ export default function SignUpPage() {
     }
   }, [user]);
 
+  const [themeMode, setThemeMode] = React.useState("light");
+
+  const darkTheme = () => {
+    setThemeMode("dark");
+  };
+
+  const lightTheme = () => {
+    setThemeMode("light");
+  };
+
+  useEffect(() => {
+    document.querySelector("html").classList.remove("dark", "light");
+    document.querySelector("html").classList.add(themeMode);
+  }, [themeMode]);
+
   return (
-    <>
+    <ThemeProvider value={{themeMode,darkTheme,lightTheme}}>
       <Header />
-      <div className="h-screen flex-col flex justify-center items-center bg-white text-black scroll-smooth">
+      <div className="h-screen flex-col flex justify-center items-center dark:bg-black dark:text-white bg-white text-black scroll-smooth">
         <div className="flex-col flex justify-center shadow-2xl drop-shadow-2xl shadow-stone-400  py-2 px-8  rounded-lg">
           <h1 className="text-5xl flex justify-center items-center font-serif">
             {loading ? "Processing" : "Signup"}
@@ -92,17 +109,26 @@ export default function SignUpPage() {
             onChange={(e) => setUser({ ...user, password: e.target.value })}
           />
           <br />
+          <Link
+            className="flex justify-center items-center pt-0"
+            href="/password-generator"
+          >
+            Password Generator
+          </Link>
           <button
             onClick={onSignup}
             className="bg-black border border-gray-300 mb-4 my-4 px-2 py-2 rounded-lg text-white hover:bg-gray-300 active:bg-green-500 hover:text-black"
           >
-            {buttonDisabled ? "No signup" : "signup"}
+            {/* {buttonDisabled ? "No signup" : "signup"} */}Signup
           </button>
-          <Link className="flex justify-center items-center animate-pulse" href="/login">
+          <Link
+            className="flex justify-center items-center animate-pulse"
+            href="/login"
+          >
             Visit Login Page
           </Link>
         </div>
       </div>
-    </>
+    </ThemeProvider>
   );
 }

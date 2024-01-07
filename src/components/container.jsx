@@ -2,8 +2,8 @@ import React from "react";
 
 function Container(props) {
   return (
-    <div className="rounded-lg flex flex-col justify-center align-center bg-white shadow-xl text-black px-3 py-2 cursor-pointer">
-        <img src={props.image} alt="" className="rounded-md h-32 w-48 p-1" />
+    <div className="rounded-lg flex flex-col justify-center align-center bg-white shadow-xl text-black px-3 py-2 cursor-pointer hover:scale-x-125 hover:scale-y-125 ease-in-out duration-300">
+        <img src={props.image} alt="" className="rounded-lg h-32 w-48 p-1 " />
         <h1 className="text-serif font-semibold p-1">{props.name}</h1>
         <p className="text-italic flex justify-start p-1">{props.para}</p>
         <div className="flex flex-row p-2 justify-between">

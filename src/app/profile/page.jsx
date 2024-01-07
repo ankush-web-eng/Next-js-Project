@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import Link from "next/link";
 import ProfileNav from "@/components/profileNav";
-import Container from "@/components/container";
+import Container from "@/components/container";import { ThemeProvider } from "@/contexts/theme";
+``
 
 export default function ProfilePage() {
   // const router = useRouter();
@@ -30,10 +31,25 @@ export default function ProfilePage() {
   //   setData(res.data.data.username);
   // };
 
+  const [themeMode, setThemeMode] = React.useState("light");
+
+  const darkTheme = () => {
+    setThemeMode("dark");
+  };
+
+  const lightTheme = () => {
+    setThemeMode("light");
+  };
+
+  useEffect(() => {
+    document.querySelector("html").classList.remove("dark", "light");
+    document.querySelector("html").classList.add(themeMode);
+  }, [themeMode]);
+
   return (
-    <>
+    <ThemeProvider value={{themeMode,darkTheme,lightTheme}}>
       <ProfileNav />
-      <div className="h-screen flex flex-col justify-center text-black bg-white ">
+      <div className="h-screen flex flex-col justify-center text-black bg-white dark:bg-black dark:text-white">
         <div className="flex flex-row justify-around top-4">
           <Container
             image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRotUMC3Rd-rdwJeBYxNiCG6e8RvB_Hq2706A&usqp=CAU"
@@ -61,7 +77,7 @@ export default function ProfilePage() {
           />
         </div>
       </div>
-    </>
+    </ThemeProvider>
   );
 }
 
